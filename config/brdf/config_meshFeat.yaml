@@ -1,0 +1,46 @@
+method: MeshFeat
+
+data:
+  n_views_train: 10
+  n_lights_per_view_train: 30
+  n_lights_per_view_test: 20
+  n_train_views_for_metrics: 100  # Number of views to use to compute metrics during traing
+
+model:
+  num_layers: 2
+  hidden_dim: 32
+  len_feature_vec: 4
+  use_zero_init: False
+  reg_type: L1
+
+  resolutions:
+  - 0.01
+  - 0.05
+  - 0.1
+  - 1
+
+dataloader:
+  batch_size_exp: 14
+
+training:
+  loss_type: L1     # Can be L1 or MSE
+  learning_rate_mlp: 0.0002
+  learning_rate_features: 0.005
+  num_epochs: 100
+  regularization_weight: 1.5e-6
+
+logging:
+  rendering_interval: 50
+
+optimizer:
+  weight_decay_mlp: 1e-05
+  weight_decay_features: 0
+
+  lr_sched_type: exp
+  lr_sched_gamma: 1
+
+timing:
+  batch_size_exp: 15
+  repetitions: 400
+
+seed: 0

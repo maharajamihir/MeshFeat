@@ -1,0 +1,43 @@
+data:
+  data_split: config/texture/human/data_split.yaml
+  img_height: 512
+  img_width: 512
+  mesh_path: data/raw/human/RUST_3d_Low1.obj
+  preproc_data_path: data/preprocessed/human_dataset_v2_tiny/
+  raw_data_path: data/raw/human_dataset_v2_tiny/
+  render_img_directory: results_texture/
+  train_render_img_names:
+  - human_test012
+  - human_test017
+experiment:
+  description: Default Config for human
+  name: Default
+  split: human/feat_dim_10
+method: MeshFeat
+model:
+  latent_corner_features_dim: 10
+  mlp_hidden_dim: 32
+  num_layers: 2
+  regularization_lat_feat: 1.5e-06
+  resolutions:
+  - 0.01
+  - 0.05
+  - 0.1
+  - 1
+  use_zero_init: false
+seed: 0
+training:
+  batch_size: 8000
+  calculate_validation_loss: true
+  coarse_to_fine: false
+  learning_rate_lat_feat: 0.005
+  learning_rate_mlp: 0.0002
+  loss_type: L1
+  num_epochs: 1000
+  out_dir: models/texture_reconstruction/
+  print_every: 1
+  reg_type: L1
+  render_every: 0
+  shuffle_dataloading: true
+  weight_decay_lat_feat: 0
+  weight_decay_mlp: 1.0e-05

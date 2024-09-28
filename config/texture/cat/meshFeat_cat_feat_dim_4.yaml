@@ -1,0 +1,49 @@
+seed: 0
+method: MeshFeat
+experiment:
+  name: Default
+  split: cat/feat_dim_4
+  description: Default Config for cat
+data:
+  raw_data_path: data/raw/cat_dataset_v2_tiny/
+  preproc_data_path: data/preprocessed/cat_dataset_v2_tiny/
+  mesh_path: data/raw/cat_rescaled_rotated/12221_Cat_v1_l3.obj
+  img_height: 512
+  img_width: 512
+  data_split: config/texture/cat/data_split.yaml
+  
+  train_render_img_names:
+    - cat_vis000
+    - cat000
+    - cat_val000
+    - cat_test000
+
+  render_img_directory: results_texture/
+model:
+  num_layers: 2
+  regularization_lat_feat: 1.5e-6
+  mlp_hidden_dim: 32
+  use_zero_init: False
+  resolutions:
+    - 0.01
+    - 0.05
+    - 0.1
+    - 1
+  latent_corner_features_dim: 4
+  neural: True
+
+training:
+  out_dir: models/texture_reconstruction/
+  batch_size: 8000
+  learning_rate_lat_feat: 0.005
+  learning_rate_mlp: 0.0002
+  weight_decay_mlp: 0.00001
+  weight_decay_lat_feat: 0
+  coarse_to_fine: False
+  shuffle_dataloading: True
+  reg_type: L1
+  loss_type: L1
+  render_every: 0
+  print_every: 1
+  calculate_validation_loss: True
+  num_epochs: 1000
