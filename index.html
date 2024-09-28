@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Multi-Resolution Features for Neural Fields on Meshes">
+  <meta name="keywords" content="MeshFeat">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MeshFeat: Multi-Resolution Features for Neural Fields on Meshes</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script-->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MeshFeat: Multi-Resolution Features for Neural Fields on Meshes
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://maharajamihir.github.io">Mihir Mahajan</a><sup>1</sup>*,</span>
+              <span class="author-block">
+                <a href="https://cvg.cit.tum.de/members/hofherrf">Florian Hofherr</a><sup>1,2</sup>*,</span>
+              <span class="author-block">
+                <a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup>1,2</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">*equal contribution</span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Technical University of Munich</span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>2</sup>Munich Center for Machine Learning</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="./MeshFeat.pdf" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2407.13592" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=7lMJJR16Ryc" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- TODO Code Link. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" disabled>
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--FIXME make image larger -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img id="teaser" src="./static/images/teaser-fig.png" alt="Teaser Figure" height="100%">
+        <h2 class="subtitle has-text-centered">
+          <span class="dnerf">MeshFeat</span> learns Neural Fields directly on a mesh.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Parametric feature grid encodings have gained significant attention as an encoding approach for
+              neural fields since they allow for much smaller MLPs which decreases the inference time of the models
+              significantly.
+            </p>
+            <p>
+              In this work, we propose <span class="dnerf">MeshFeat</span>, a parametric feature encoding tailored to
+              meshes, for which we adapt the idea of multi-resolution feature grids from Euclidean space. We start from
+              the structure provided by the given vertex topology and use a mesh simplification algorithm to construct a
+              multi-resolution feature representation directly on the mesh.
+            </p>
+            <p>
+              The approach allows the usage of small MLPs for neural fields on meshes, and we show a significant
+              speed-up compared to previous representations while maintaining comparable reconstruction quality for
+              texture reconstruction and BRDF representation. Given its intrinsic coupling to the vertices, the method
+              is particularly well-suited for representations on deforming meshes, making it a good fit for object
+              animation.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/7lMJJR16Ryc?si=We6hT9Lsi24oXOAR" frameborder="0"
+              allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+
+  <!--TODO from here -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Comparison to Baselines. -->
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experiments</h2>
+
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content">
+
+        <!-- Inference Speedup. -->
+        <h3 class="title is-4">Inference speed-up</h3>
+        <div class="content has-text-justified">
+          <p>
+            <span class="dnerf">MeshFeat</span> enables an inference speed-up of over a magnitude compared to the
+            baseline methods. Moreover, a non-neural approach is only twice as fast, highlighting the efficiency of
+            MeshFeat.
+          </p>
+          <img src="static/images/chart.svg" alt="Inference Speedup">
+        </div>
+
+        <!--/ Inference speed-up. -->
+              <!-- Texture reconctruction. -->
+              <h2 class="title is-4">Texture Reconstruction</h2>
+              <p>
+                <span class="dnerf">MeshFeat</span> enables high-quality reconstructions, matching state-of-the-art methods in visual fidelity.
+              </p>
+              <div class="image-grid">
+                <div class="image-row">
+                    <video poster="" autoplay="" controls="" muted="" loop="" style="pointer-events: none;">
+                      <source src="./static/videos/tex_recon_qualitative_cropped.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ . -->
+
+
+
+        <!-- Mesh Deformations. -->
+        <h2 class="title is-3"><span class="dnerf">MeshFeat</span> on deforming meshes</h2>
+        <div class="content">
+          <p>
+            <span class="dnerf">MeshFeat</span> supports mesh deformations natively making it a good fit for object
+            animations.
+          </p>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content">
+              <div class="image-grid">
+                <div class="image-row">
+                  <div class="image-container">
+                    <p>Reference Mesh (Face)</p>
+                    <img src="static/images/face-reference.jpg" alt="Image 1">
+                    <p>Reference Mesh (Elephant)</p>
+                    <img src="static/images/elephant-reference.jpg" alt="Image 1">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- . -->
+          <div class="column">
+            <div class="columns is-centered">
+              <div class="column content">
+
+                <div class="image-grid">
+                  <div class="image-row">
+                    <div class="image-container">
+                      <p>Deformed Meshes (Face)</p>
+                      <img src="static/images/face.gif" alt="Image 1">
+                      <p>Animated deformations (Elephant)</p>
+                      <img src="static/images/elephant.gif" alt="Image 1">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/ Mesh Deformations. -->
+
+        </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+      @inproceedings{mahajan2024meshFeat,
+        author = {M Mahajan and F Hofherr and D Cremers},
+        title = {MeshFeat: Multi-Resolution Features for Neural Fields on Meshes},
+        booktitle = {European Conference on Computer Vision (ECCV)},
+        year = {2024},
+        eprint = {2407.13592},
+        eprinttype = {arXiv},
+      }
+</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <!--TODO add paper and repo link-->
+        <a class="icon-link" href="#">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="#" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p style="text-align:center">
+              Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+                href="https://nerfies.github.io/">Nerfies website</a>.
+            </p>
+            <p style="text-align:center">
+              Please contact <a href="https://maharajamihir.github.io/">Mihir Mahajan</a> or <a href="https://cvg.cit.tum.de/members/hofherrf">Florian Hofherr</a> for feedback and questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
