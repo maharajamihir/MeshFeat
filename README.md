@@ -26,7 +26,7 @@
 
 <p>&nbsp;</p>
 
-![teaser](assets/teaser-fig.png)
+![teaser](static/images/teaser-fig.png)
 <p align="justify"><sub>MeshFeat is a parametric encoding strategy for neural fields on meshes. 
 We propose a multi-resolution strategy based on mesh simplification to enhance the efficiency of the encoding. Our approach allows for much smaller MLPs than previous frequency-based encodings, resulting in significantly faster inference times.
 We evaluate the method for texture reconstruction and BRDF estimation and demonstrate, that the encoding is well suited to represent signals on deforming meshes.</sub></p>
